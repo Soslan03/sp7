@@ -3,10 +3,10 @@ package ru.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.dao.PersonDao;
+
+import ru.models.User;
 
 //import javax.annotation.processing.Generated;
 
@@ -29,5 +29,29 @@ public class PeopleController {
         model.addAttribute("person", personDao.show(id));
         return "people/show";
 
+    }
+    @GetMapping("/new")
+    public String newPerson(@ModelAttribute("person") User person){
+        return "people/new";
+    }
+    @PostMapping()
+    public String create(@ModelAttribute("person") User person){
+        personDao.save(person);
+        return "redirect:/people";
+    }
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model){
+        model.addAttribute("person", personDao.show(id));
+        return "people/edit";
+    }
+    @PatchMapping("/{id}")
+    public String updte(@ModelAttribute("person") User person, @PathVariable("id") int id){
+        personDao.edit(person, id);
+        return "redirect:/people";
+    }
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id){
+        personDao.delete(id);
+        return "redirect:/people";
     }
 }
