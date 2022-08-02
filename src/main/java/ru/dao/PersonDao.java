@@ -11,11 +11,11 @@ public class PersonDao {
     private List<User> people;
     {
         people = new ArrayList<>();
-        people.add(new User(++peapleCount,"Tom"));
-        people.add(new User(++peapleCount,"Jon"));
-        people.add(new User(++peapleCount,"Bill"));
-        people.add(new User(++peapleCount,"Lisa"));
-        people.add(new User(++peapleCount,"Nell"));
+        people.add(new User(++peapleCount,"Tom", 24, "tom@mail.ru"));
+        people.add(new User(++peapleCount,"Jon",52, "bob@mail.ru"));
+        people.add(new User(++peapleCount,"Bill", 18, "mike@yahoo.com"));
+        people.add(new User(++peapleCount,"Lisa", 34, "katy@gmail.com"));
+        people.add(new User(++peapleCount,"Nell", 45, "nell@rambler.ru"));
 
     }
     public List<User> index(){
@@ -33,6 +33,8 @@ public class PersonDao {
     public void edit(User person, int id) {
         User persontoBeUpdate= show(id);
         persontoBeUpdate.setName(person.getName());
+        persontoBeUpdate.setAge(person.getAge());
+        persontoBeUpdate.setEmail(person.getEmail());
 
     }
 

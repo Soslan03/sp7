@@ -3,10 +3,13 @@ package ru.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.dao.PersonDao;
 
 import ru.models.User;
+
+import javax.validation.Valid;
 
 //import javax.annotation.processing.Generated;
 
@@ -35,8 +38,9 @@ public class PeopleController {
         return "people/new";
     }
     @PostMapping()
-    public String create(@ModelAttribute("person") User person){
+    public String create(@ModelAttribute("person") @Valid User person, BindingResult bindingResult){
         personDao.save(person);
+        if (bindingResult.hasErrors()) { return "people/new"; }
         return "redirect:/people";
     }
     @GetMapping("/{id}/edit")
@@ -45,8 +49,9 @@ public class PeopleController {
         return "people/edit";
     }
     @PatchMapping("/{id}")
-    public String updte(@ModelAttribute("person") User person, @PathVariable("id") int id){
+    public String updte(@ModelAttribute("person") @Valid User person, BindingResult bindingResult, @PathVariable("id") int id){
         personDao.edit(person, id);
+        if (bindingResult.hasErrors()) { return "people/edit"; }
         return "redirect:/people";
     }
     @DeleteMapping("/{id}")
