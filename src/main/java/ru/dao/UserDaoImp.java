@@ -1,14 +1,20 @@
 package ru.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.models.User;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
-@Component
-public class PersonDao {
+@Repository
+public class UserDaoImp implements UserDao {
     private final EntityManager entityManager;
+    @Autowired
+    public UserDaoImp(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
     private int peapleCount=0;
     private List<User> people;
     {
@@ -21,16 +27,14 @@ public class PersonDao {
 
     }
 
-    public PersonDao(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+
 
     public List<User> index(){
         return people;
     }
-//    public User show(int id){
-//        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
-//    }
+    public User show(int id){
+        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+    }
 
     public void save(User person) {
 //        person.setId(++peapleCount);
@@ -38,13 +42,13 @@ public class PersonDao {
         entityManager.persist(person);
     }
 
-//    public void edit(User person, int id) {
-//        User persontoBeUpdate= show(id);
-//        persontoBeUpdate.setName(person.getName());
-//        persontoBeUpdate.setAge(person.getAge());
-//        persontoBeUpdate.setEmail(person.getEmail());
-//
-//    }
+    public void edit(User person, int id) {
+        User persontoBeUpdate= show(id);
+        persontoBeUpdate.setName(person.getName());
+        persontoBeUpdate.setAge(person.getAge());
+        persontoBeUpdate.setEmail(person.getEmail());
+
+    }
 
     public void delete(int id) {
         people.removeIf(p ->p.getId() == id);
