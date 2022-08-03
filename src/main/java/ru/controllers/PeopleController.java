@@ -31,7 +31,7 @@ public class PeopleController {
     }
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model){
-   //     model.addAttribute("person", userservice.show(id));
+        model.addAttribute("person", userservice.show(id));
         return "people/show";
 
     }
@@ -47,12 +47,12 @@ public class PeopleController {
     }
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model){
-     //   model.addAttribute("person", personDao.show(id));
+        model.addAttribute("person", userservice.show(id));
         return "people/edit";
     }
     @PatchMapping("/{id}")
     public String updte(@ModelAttribute("person") @Valid User person, BindingResult bindingResult, @PathVariable("id") int id){
-    //    personDao.edit(person, id);
+      userservice.edit(person, id);
         if (bindingResult.hasErrors()) { return "people/edit"; }
         return "redirect:/people";
     }
