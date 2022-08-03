@@ -52,10 +52,10 @@ public class PeopleController {
         return "people/edit";
     }
     @PatchMapping("/{id}")
-    public String updte(@ModelAttribute("person") @Valid User person, BindingResult bindingResult, @PathVariable("id") int id){
+    public String update(@ModelAttribute("person") @Valid User person, BindingResult bindingResult, @PathVariable("id") int id){
 
         if (bindingResult.hasErrors()) { return "people/edit"; }
-        else  userservice.save(person);
+        else  userservice.edit(person,id);
         return "redirect:/people";
     }
     @DeleteMapping("/{id}")
