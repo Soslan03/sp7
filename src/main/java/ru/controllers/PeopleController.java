@@ -41,8 +41,9 @@ public class PeopleController {
     }
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid User person, BindingResult bindingResult){
-        userservice.save(person);
+
         if (bindingResult.hasErrors()) { return "people/new"; }
+        else  userservice.save(person);
         return "redirect:/people";
     }
     @GetMapping("/{id}/edit")
@@ -52,8 +53,9 @@ public class PeopleController {
     }
     @PatchMapping("/{id}")
     public String updte(@ModelAttribute("person") @Valid User person, BindingResult bindingResult, @PathVariable("id") int id){
-      userservice.edit(person, id);
+
         if (bindingResult.hasErrors()) { return "people/edit"; }
+        else  userservice.save(person);
         return "redirect:/people";
     }
     @DeleteMapping("/{id}")
