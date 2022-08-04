@@ -31,14 +31,14 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     @Override
-    public void save(User person) {
-        userDao.save(person);
+    public void save(User user) {
+        userDao.save(user);
     }
 
     @Transactional
     @Override
-    public void edit(User person, int id) {
-        userDao.edit(person, id);
+    public void edit(User user) {
+        userDao.edit(user);
     }
 
     @Transactional
