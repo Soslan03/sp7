@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="spring_crud@localhost" uuid="b0cbac0d-84bf-47ee-9a59-b3778b6688ea">
+    <data-source source="LOCAL" name="spring_crud@localhost [2]" uuid="c4f6090d-3d19-4ceb-9f2a-e84f08900aff">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.NonRegisteringDriver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/spring_crud</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>

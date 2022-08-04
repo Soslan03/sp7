@@ -11,46 +11,32 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
     private final EntityManager entityManager;
-
     @Autowired
     public UserDaoImp(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-
-
     @Override
     @SuppressWarnings("unchecked")
-    public List<User> index() {
-
-
+    public List<User> listUsers() {
         return entityManager.createQuery(" FROM User").getResultList();
     }
-
     @Override
-    public User show(int id) {
-
+    public User getUserById(int id) {
         return entityManager.find(User.class, id);
     }
-
     @Override
-    public void save(User person) {
-
-        entityManager.persist(person);
+    public void save(User user) {
+        entityManager.persist(user);
     }
-
     @Override
-    public void edit(User person, int id) {
-
+    public void edit(User user, int id) {
         User edit = entityManager.find(User.class, id);
-        edit.setName(person.getName());
-        edit.setAge(person.getAge());
-        edit.setEmail(person.getEmail());
-
+        edit.setName(user.getName());
+        edit.setAge(user.getAge());
+        edit.setEmail(user.getEmail());
     }
-
     @Override
     public void delete(int id) {
-
         entityManager.remove(entityManager.find(User.class, id));
     }
 }

@@ -8,24 +8,25 @@ import ru.models.User;
 
 import java.util.List;
 
-@Service()
-public class UserServiceImp implements UserService{
+@Service
+public class UserServiceImp implements UserService {
     private final UserDao userDao;
 
     @Autowired
     public UserServiceImp(UserDao userDao) {
         this.userDao = userDao;
     }
-    @Transactional(readOnly = true)
-    @Override
-    public List<User> index() {
 
-        return userDao.index();
-    }
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
-    public User show(int id) {
-        return userDao.show(id);
+    public List<User> listUsers() {
+        return userDao.listUsers();
+    }
+
+    @Transactional
+    @Override
+    public User getUserById(int id) {
+        return userDao.getUserById(id);
     }
 
     @Transactional
@@ -33,11 +34,13 @@ public class UserServiceImp implements UserService{
     public void save(User person) {
         userDao.save(person);
     }
+
     @Transactional
     @Override
     public void edit(User person, int id) {
         userDao.edit(person, id);
     }
+
     @Transactional
     @Override
     public void delete(int id) {
